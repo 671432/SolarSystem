@@ -102,13 +102,13 @@ export class SolarSystem {
     animate() {
         this.rotateObject(this.sun, [0, 0.005, 0]);
 
-        this.rotateObject(this.earthOrbitNode, [0, 0.01, 0]);
+        this.rotateObject(this.earthOrbitNode, [0, 0.005, 0]);
         this.rotateObject(this.earth, [0, 0.005, 0]);
 
-        this.rotateObject(this.marsOrbitNode, [0, -0.02, 0]);
+        this.rotateObject(this.marsOrbitNode, [0, -0.007, 0]);
         this.rotateObject(this.mars, [0, 0.005, 0]);
 
-        this.rotateObject(this.mercuryOrbitNode, [0, 0.03, 0]);
+        this.rotateObject(this.mercuryOrbitNode, [0, 0.01, 0]);
         this.rotateObject(this.mercury, [0, 0.005, 0]);
     }
 
