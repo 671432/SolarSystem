@@ -118,6 +118,12 @@ const solarSystem = new SolarSystem(scene);
  */
 const gui = new GUI();
 
+function godMode() {
+    // TODO: back to godMode (fly, no collision, etc)
+    console.log("applied godMode");
+    // player.position.set(sunPosition.x, sunPosition.y, sunPosition.z);
+}
+
 function teleportToSun() {
     // TODO: Teleport to Sun
     console.log("Teleporting to the Sun");
@@ -138,6 +144,7 @@ function teleportToMars() {
 
 // Create a folder for the locations
 const folder = gui.addFolder('Teleport to');
+folder.add({ teleport: godMode }, 'teleport').name('Back to God Mode');
 folder.add({ teleport: teleportToSun }, 'teleport').name('Sun');
 folder.add({ teleport: teleportToMoon }, 'teleport').name('Moon');
 folder.add({ teleport: teleportToMars }, 'teleport').name('Mars');

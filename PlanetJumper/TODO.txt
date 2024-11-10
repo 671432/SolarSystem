@@ -1,0 +1,12 @@
+
+*implement Earth's Moon
+
+*teleport Logic
+**scene change
+**player downscale (instead of increasing planet size)
+
+*add object collision for after teleportation
+
+*WASD movement
+
+*hight map (Mars, Moon)
