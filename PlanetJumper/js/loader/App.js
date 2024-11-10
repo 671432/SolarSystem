@@ -15,7 +15,7 @@ const near = 0.1;
 const far = 100;
 
 const camera = new PerspectiveCamera(fov, aspect, near, far);
-// Flytter camera vekk fra sentrum, vil ikke ha noe effekt i VR
+// moves cam away from  oregon. won't have any effect in VR
 camera.position.setZ(30);
 
 const raycaster = new Raycaster();
@@ -30,7 +30,7 @@ const renderer = new WebGLRenderer({canvas, context});
 renderer.setClearColor(0x000000); // "Bakgrunnsfarge"
 renderer.setSize(width, height);
 
-// Dette er for å ha og aktivere VR
+// to have and activate VR
 document.body.appendChild(VRButton.createButton(renderer));
 renderer.xr.enabled = true;
 // end
@@ -124,7 +124,7 @@ const texture = loader.load([
 scene.background = texture;
 
 
-// Dette er kun hvis VR er i scenen
+// Only IF VR is in the scene
 renderer.setAnimationLoop(render);
 
 function render(){
@@ -134,7 +134,7 @@ function render(){
 
     console.log('Planets:', solarSystem.getPlanets());
 
-    // Hvis vi ikke har VR har vi denne
+    // if VR is NOT addded, we use this.
     // window.requestAnimationFrame(render);
 }
 
