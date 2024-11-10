@@ -5,6 +5,8 @@ import {SolarSystem} from "./SolarSystem.js";
 import {OrbitControls} from "../build/OrbitControls.js";
 import {VRButton} from "../build/VRButton.js";
 import { CubeTextureLoader } from '../build/three.module.js';
+import {GUI} from '../lib/dat.gui.module.js';
+import * as THREE from '../lib/three.module.js';
 
 const width = window.innerWidth;
 const height= window.innerHeight;
@@ -110,6 +112,38 @@ window.addEventListener('resize', () => {
 
 const scene = new Scene();
 const solarSystem = new SolarSystem(scene);
+
+/**
+ * GUI
+ */
+const gui = new GUI();
+
+function teleportToSun() {
+    // TODO: Teleport to Sun
+    console.log("Teleporting to the Sun");
+    // player.position.set(sunPosition.x, sunPosition.y, sunPosition.z);
+}
+
+function teleportToMoon() {
+    // TODO: Teleport to Moon (Need to create Earth's Moon first)
+    console.log("Teleporting to the Moon");
+    // player.position.set(moonPosition.x, moonPosition.y, moonPosition.z);
+}
+
+function teleportToMars() {
+    // TODO: Teleport to Mars
+    console.log("Teleporting to Mars");
+    // player.position.set(marsPosition.x, marsPosition.y, marsPosition.z);
+}
+
+// Create a folder for the locations
+const folder = gui.addFolder('Teleport to');
+folder.add({ teleport: teleportToSun }, 'teleport').name('Sun');
+folder.add({ teleport: teleportToMoon }, 'teleport').name('Moon');
+folder.add({ teleport: teleportToMars }, 'teleport').name('Mars');
+folder.open();
+
+
 
 const loader = new CubeTextureLoader();
 const texture = loader.load([
