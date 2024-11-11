@@ -1,5 +1,8 @@
 
-*implement Earth's Moon
+*implement Earth's Moon (done)
+**attatch moon to earth orbit
+***moon has to rotate around earth, not sun
+***moon has to  stay in earth's orbit even when earth is moved by the player.
 
 *teleport Logic
 **scene change

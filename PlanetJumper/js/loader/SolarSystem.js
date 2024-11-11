@@ -32,18 +32,17 @@ export class SolarSystem {
             MaterialType: MeshBasicMaterial
         });
 
-        this.centerOfSystem.add(this.sun)
 
         this.earthOrbitNode = new Object3D();
-
-        this.centerOfSystem.add(this.earthOrbitNode);
-
+        this.moonOrbitNode = new Object3D();
         this.marsOrbitNode = new Object3D();
-
-        this.centerOfSystem.add(this.marsOrbitNode);
-
         this.mercuryOrbitNode = new Object3D();
 
+        this.centerOfSystem.add(this.sun)
+        this.centerOfSystem.add(this.earthOrbitNode);
+        //this.centerOfSystem.add(this.moonOrbitNode);
+        this.earthOrbitNode.add(this.moonOrbitNode);
+        this.centerOfSystem.add(this.marsOrbitNode);
         this.centerOfSystem.add(this.mercuryOrbitNode);
 
         this.earth = this.createSphericalBody({
@@ -54,6 +53,16 @@ export class SolarSystem {
             MaterialType: MeshPhongMaterial,
             specularMapUrl: 'assets/earthspec1k.jpg',
             normalMapUrl: 'assets/2k_earth_normal_map.png'
+        });
+
+        this.moon = this.createSphericalBody({
+            radius: (sunRadius * 0.5) * 0.4,
+            widthSegments, heightSegments,
+            shininess: 10,
+            assetUrl: 'assets/moon.jpg',
+            MaterialType: MeshPhongMaterial,
+            //specularMapUrl: 'assets/earthspec1k.jpg',
+            //normalMapUrl: 'assets/2k_earth_normal_map.png'
         });
 
         this.mars = this.createSphericalBody({
@@ -77,14 +86,17 @@ export class SolarSystem {
         });
 
         this.earth.position.x = 15;
+        this.moon.position.x = this.earth.position.x+5;
         this.mars.position.x = 30;
         this.mercury.position.x = 45;
 
         this.earthOrbitNode.add(this.earth);
+        this.moonOrbitNode.add(this.moon);
         this.marsOrbitNode.add(this.mars);
         this.mercuryOrbitNode.add(this.mercury);
 
         this.planets.push(this.earth);
+        this.planets.push(this.moon);
         this.planets.push(this.mars);
         this.planets.push(this.mercury);
 
@@ -102,14 +114,17 @@ export class SolarSystem {
     animate() {
         this.rotateObject(this.sun, [0, 0.005, 0]);
 
-        this.rotateObject(this.earthOrbitNode, [0, 0.005, 0]);
-        this.rotateObject(this.earth, [0, 0.005, 0]);
+        this.rotateObject(this.earthOrbitNode, [0, 0.0008, 0]);
+        this.rotateObject(this.earth, [0, 0.003, 0]);
 
-        this.rotateObject(this.marsOrbitNode, [0, -0.007, 0]);
-        this.rotateObject(this.mars, [0, 0.005, 0]);
+        this.rotateObject(this.moonOrbitNode, [0, 0.0002, 0]);
+        this.rotateObject(this.moon, [0, 0.003, 0]);
 
-        this.rotateObject(this.mercuryOrbitNode, [0, 0.01, 0]);
-        this.rotateObject(this.mercury, [0, 0.005, 0]);
+        this.rotateObject(this.marsOrbitNode, [0, -0.0007, 0]);
+        this.rotateObject(this.mars, [0, 0.003, 0]);
+
+        this.rotateObject(this.mercuryOrbitNode, [0, 0.001, 0]);
+        this.rotateObject(this.mercury, [0, 0.003, 0]);
     }
 
 
