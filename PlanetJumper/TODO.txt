@@ -4,6 +4,8 @@
 ***moon has to rotate around earth, not sun
 ***moon has to  stay in earth's orbit even when earth is moved by the player.
 
+*add light blocking object inside earth so that the moon doesn't light up when the earth is between the sun and the moon.
+
 *teleport Logic
 **scene change
 **player downscale (instead of increasing planet size)
