@@ -143,11 +143,11 @@ function teleportToMars() {
 }
 
 // Create a folder for the locations
-const folder = gui.addFolder('Teleport to');
-folder.add({ teleport: godMode }, 'teleport').name('Back to God Mode');
-folder.add({ teleport: teleportToSun }, 'teleport').name('Sun');
-folder.add({ teleport: teleportToMoon }, 'teleport').name('Moon');
-folder.add({ teleport: teleportToMars }, 'teleport').name('Mars');
+const folder = gui.addFolder('Options');
+folder.add({ teleport: godMode }, 'teleport').name('Enable God Mode');
+folder.add({ teleport: teleportToSun }, 'teleport').name('Teleport: Sun');
+folder.add({ teleport: teleportToMoon }, 'teleport').name('Teleport: Moon');
+folder.add({ teleport: teleportToMars }, 'teleport').name('Teleport: Mars');
 folder.open();
 
 
