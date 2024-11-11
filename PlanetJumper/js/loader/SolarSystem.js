@@ -17,6 +17,7 @@ export class SolarSystem {
         let sunRadius = 5;
         let widthSegments = 64;
         let heightSegments = 64;
+        let earthRadius = sunRadius*0.5;
 
         this.textureLoader = new TextureLoader();
 
@@ -56,7 +57,7 @@ export class SolarSystem {
         });
 
         this.moon = this.createSphericalBody({
-            radius: (sunRadius * 0.5) * 0.4,
+            radius: earthRadius * 0.4,
             widthSegments, heightSegments,
             shininess: 10,
             assetUrl: 'assets/moon.jpg',
@@ -117,7 +118,7 @@ export class SolarSystem {
         this.rotateObject(this.earthOrbitNode, [0, 0.0008, 0]);
         this.rotateObject(this.earth, [0, 0.003, 0]);
 
-        this.rotateObject(this.moonOrbitNode, [0, 0.0002, 0]);
+        this.rotateObject(this.moonOrbitNode, [0, 0.002, 0]); //faster on purpose cuz troubleshooting animation (set to 0.0002 when done)
         this.rotateObject(this.moon, [0, 0.003, 0]);
 
         this.rotateObject(this.marsOrbitNode, [0, -0.0007, 0]);
