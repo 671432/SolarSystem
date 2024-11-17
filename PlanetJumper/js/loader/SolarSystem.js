@@ -62,8 +62,8 @@ export class SolarSystem {
             shininess: 10,
             assetUrl: 'assets/moon.jpg',
             MaterialType: MeshPhongMaterial,
-            //specularMapUrl: 'assets/earthspec1k.jpg',
-            //normalMapUrl: 'assets/2k_earth_normal_map.png'
+            specularMapUrl: 'assets/moonspec.jpg',
+            normalMapUrl: 'assets/MoonNormalMap.jpg'
         });
 
         this.mars = this.createSphericalBody({
@@ -72,8 +72,8 @@ export class SolarSystem {
             shininess: 10,
             assetUrl: 'assets/mars.jpg',
             MaterialType: MeshPhongMaterial,
-            //specularMapUrl: 'assets/earthspec1k.jpg',
-            //normalMapUrl: 'assets/2k_earth_normal_map.png'
+            specularMapUrl: 'assets/marsspec.jpg',
+            normalMapUrl: 'assets/marsNormalMap.jpg'
         });
 
         this.mercury = this.createSphericalBody({
@@ -82,8 +82,8 @@ export class SolarSystem {
             shininess: 10,
             assetUrl: 'assets/mercury.jpg',
             MaterialType: MeshPhongMaterial,
-            //specularMapUrl: 'assets/earthspec1k.jpg',
-            //normalMapUrl: 'assets/2k_earth_normal_map.png'
+            specularMapUrl: 'assets/mercuryspec.jpg',
+            normalMapUrl: 'assets/mercuryNormalMap.jpg'
         });
 
         this.earth.position.x = 15;
@@ -92,7 +92,8 @@ export class SolarSystem {
         this.mercury.position.x = 45;
 
         this.earthOrbitNode.add(this.earth);
-        this.moonOrbitNode.add(this.moon);
+        this.earthOrbitNode.add(this.moon);
+        //this.moonOrbitNode.add(this.moon);
         this.marsOrbitNode.add(this.mars);
         this.mercuryOrbitNode.add(this.mercury);
 
