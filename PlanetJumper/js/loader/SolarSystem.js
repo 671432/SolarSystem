@@ -37,6 +37,8 @@ export class SolarSystem {
         this.centerOfSystem.add(this.marsOrbitNode);
         this.centerOfSystem.add(this.mercuryOrbitNode);
 
+        this.moonOrbitNode.position.set(15, 0, 0);
+
         this.earth = this.createSphericalBody({
             radius: sunRadius * 0.5,
             widthSegments, heightSegments,
@@ -78,13 +80,13 @@ export class SolarSystem {
         });
 
         this.earth.position.x = 15;
-        this.moon.position.x = this.earth.position.x+5;
+        this.moon.position.x = 5;
         this.mars.position.x = 30;
         this.mercury.position.x = 45;
 
         this.earthOrbitNode.add(this.earth);
         this.earthOrbitNode.add(this.moon);
-        //this.moonOrbitNode.add(this.moon);
+        this.moonOrbitNode.add(this.moon);
         this.marsOrbitNode.add(this.mars);
         this.mercuryOrbitNode.add(this.mercury);
 
@@ -110,8 +112,8 @@ export class SolarSystem {
         this.rotateObject(this.earthOrbitNode, [0, 0.0008, 0]);
         this.rotateObject(this.earth, [0, 0.003, 0]);
 
-        this.rotateObject(this.moonOrbitNode, [0, 0.002, 0]); //faster on purpose cuz troubleshooting animation (set to 0.0002 when done)
-        this.rotateObject(this.moon, [0, 0.003, 0]);
+        this.rotateObject(this.moonOrbitNode, [0, 0.005, 0]); //faster on purpose cuz troubleshooting animation (set to 0.0002 when done)
+        this.rotateObject(this.moon, [0, -0.006, 0]);
 
         this.rotateObject(this.marsOrbitNode, [0, -0.0007, 0]);
         this.rotateObject(this.mars, [0, 0.003, 0]);
