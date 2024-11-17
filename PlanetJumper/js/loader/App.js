@@ -8,7 +8,7 @@ import { CubeTextureLoader } from '../build/three.module.js';
 import {GUI} from '../lib/dat.gui.module.js';
 import * as THREE from '../lib/three.module.js';
 import { WASDMovement } from './WASDMovement.js';
-
+import { MoonWalk } from './MoonWalk.js';
 
 const width = window.innerWidth;
 const height= window.innerHeight;
@@ -29,6 +29,9 @@ const mouse = new Vector2();
 let grabbedObject = null;
 const invisiblePlane = new Plane();
 
+
+
+
 const canvas = document.createElement('canvas');
 const context = canvas.getContext('webgl2');
 
@@ -43,12 +46,12 @@ renderer.xr.enabled = true;
 
 
 document.body.appendChild(renderer.domElement);
-/*
+
 document.addEventListener('mousedown', onMouseDown, false);
 document.addEventListener('mouseup', onMouseUp, false);
 document.addEventListener('mousemove', onMouseMove, false);
 
-/*
+
 function onMouseDown(event) {
     // Convert mouse position to normalized device coordinates (-1 to +1)
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
@@ -95,7 +98,7 @@ function onMouseMove(event) {
             grabbedObject.position.copy(intersectionPoint); // Move the planet
         }
     }
-}*/
+}
 
 
 
@@ -109,8 +112,8 @@ controls.maxDistance = 100;
 controls.maxPolarAngle = Math.PI;
 
 // Disable camera rotation with click-and-drag
-controls.enableRotate = false;
-controls.enablePan = false;
+//controls.enableRotate = false;
+//controls.enablePan = false;
 
 window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
@@ -121,14 +124,18 @@ window.addEventListener('resize', () => {
 
 const scene = new Scene();
 const solarSystem = new SolarSystem(scene);
+let activeScene = "solarSystem";
 
 /**
  * GUI
  */
 const gui = new GUI();
 
+const moonWalk = new MoonWalk(renderer);
+
 function godMode() {
     // TODO: back to godMode (fly, no collision, etc)
+    activeScene = "solarSystem";
     console.log("applied godMode");
     // player.position.set(sunPosition.x, sunPosition.y, sunPosition.z);
 }
@@ -141,8 +148,10 @@ function teleportToSun() {
 
 function teleportToMoon() {
     // TODO: Teleport to Moon (Need to create Earth's Moon first)
+    activeScene = "moonWalk";
     console.log("Teleporting to the Moon");
     // player.position.set(moonPosition.x, moonPosition.y, moonPosition.z);
+    camera.position.set(0, 2, 5); 
 }
 
 function teleportToMars() {
@@ -158,6 +167,9 @@ folder.add({ teleport: teleportToSun }, 'teleport').name('Teleport: Sun');
 folder.add({ teleport: teleportToMoon }, 'teleport').name('Teleport: Moon');
 folder.add({ teleport: teleportToMars }, 'teleport').name('Teleport: Mars');
 folder.open();
+
+
+
 
 
 
@@ -178,13 +190,15 @@ scene.background = texture;
 renderer.setAnimationLoop(render);
 
 function render(){
-    solarSystem.animate();
+    if (activeScene === "solarSystem") {
+        solarSystem.animate();
+        renderer.render(scene, camera);
+    } else if (activeScene === "moonWalk") {
+        moonWalk.render();
+    }
+    requestAnimationFrame(render);
 
-    renderer.render(scene, camera);
-
-    wasdMovement.update();
-
-    console.log('Planets:', solarSystem.getPlanets());
+    //console.log('Planets:', solarSystem.getPlanets());
 
     // if VR is NOT addded, we use this.
     // window.requestAnimationFrame(render);
