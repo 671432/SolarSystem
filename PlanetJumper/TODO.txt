@@ -1,17 +1,17 @@
 
 *implement Earth's Moon (done)
-**attatch moon to earth orbit
-***moon has to rotate around earth, not sun
-***moon has to  stay in earth's orbit even when earth is moved by the player.
+**attatch moon to earth orbit (fuck this for now)
+***moon has to rotate around earth, not sun (fuck this for now aswell)
+***moon has to  stay in earth's orbit even when earth is moved by the player. (fuck this for now aswell)
 
-*add light blocking object inside earth so that the moon doesn't light up when the earth is between the sun and the moon.
+*add light blocking object inside earth so that the moon doesn't light up when the earth is between the sun and the moon. (fuck this for now aswell)
 
 *teleport Logic
 **scene change
-**player downscale (instead of increasing planet size)
+**player downscale (instead of increasing planet size) (fuck this for now aswell)
 
 *add object collision for after teleportation
 
-*WASD movement
+*WASD movement (done, janky, but done)
 
-*hight map (Mars, Moon)
+*hight map (Mars, Moon) (done kinda, bump map)

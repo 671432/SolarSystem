@@ -1,10 +1,9 @@
 ﻿"use strict";
 
-import {PerspectiveCamera, Plane, Raycaster, Scene, Vector2, Vector3, WebGLRenderer} from "../build/three.module.js";
+import {PerspectiveCamera, Plane, Raycaster, Scene, Vector2, Vector3, WebGLRenderer, CubeTextureLoader} from "../build/three.module.js";
 import {SolarSystem} from "./SolarSystem.js";
 import {OrbitControls} from "../build/OrbitControls.js";
 import {VRButton} from "../build/VRButton.js";
-import { CubeTextureLoader } from '../build/three.module.js';
 import {GUI} from '../lib/dat.gui.module.js';
 import * as THREE from '../lib/three.module.js';
 import { WASDMovement } from './WASDMovement.js';
@@ -50,6 +49,7 @@ document.body.appendChild(renderer.domElement);
 document.addEventListener('mousedown', onMouseDown, false);
 document.addEventListener('mouseup', onMouseUp, false);
 document.addEventListener('mousemove', onMouseMove, false);
+
 
 
 function onMouseDown(event) {
@@ -103,6 +103,7 @@ function onMouseMove(event) {
 
 
 
+
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true; 
 controls.dampingFactor = 0.05; 
@@ -112,8 +113,8 @@ controls.maxDistance = 100;
 controls.maxPolarAngle = Math.PI;
 
 // Disable camera rotation with click-and-drag
-//controls.enableRotate = false;
-//controls.enablePan = false;
+////controls.enableRotate = false;
+////controls.enablePan = false;
 
 window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
@@ -198,7 +199,7 @@ function render(){
     }
     requestAnimationFrame(render);
 
-    //console.log('Planets:', solarSystem.getPlanets());
+    ////console.log('Planets:', solarSystem.getPlanets());
 
     // if VR is NOT addded, we use this.
     // window.requestAnimationFrame(render);
