@@ -43,12 +43,12 @@ renderer.xr.enabled = true;
 
 
 document.body.appendChild(renderer.domElement);
-/*
+
 document.addEventListener('mousedown', onMouseDown, false);
 document.addEventListener('mouseup', onMouseUp, false);
 document.addEventListener('mousemove', onMouseMove, false);
 
-/*
+
 function onMouseDown(event) {
     // Convert mouse position to normalized device coordinates (-1 to +1)
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
@@ -95,7 +95,7 @@ function onMouseMove(event) {
             grabbedObject.position.copy(intersectionPoint); // Move the planet
         }
     }
-}*/
+}
 
 
 
@@ -109,8 +109,8 @@ controls.maxDistance = 100;
 controls.maxPolarAngle = Math.PI;
 
 // Disable camera rotation with click-and-drag
-controls.enableRotate = false;
-controls.enablePan = false;
+//controls.enableRotate = false;
+//controls.enablePan = false;
 
 window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;

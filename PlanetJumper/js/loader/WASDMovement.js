@@ -1,6 +1,6 @@
 "use strict";
 
-import * as THREE from 'three';
+import * as THREE from '../lib/three.module.js';
 
 export class WASDMovement {
     constructor(camera, speed = 0.1, rotationSpeed = 0.01) {
