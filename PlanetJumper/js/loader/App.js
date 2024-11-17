@@ -7,6 +7,8 @@ import {VRButton} from "../build/VRButton.js";
 import { CubeTextureLoader } from '../build/three.module.js';
 import {GUI} from '../lib/dat.gui.module.js';
 import * as THREE from '../lib/three.module.js';
+import { WASDMovement } from './WASDMovement.js';
+
 
 const width = window.innerWidth;
 const height= window.innerHeight;
@@ -19,6 +21,8 @@ const far = 100;
 const camera = new PerspectiveCamera(fov, aspect, near, far);
 // moves cam away from  oregon. won't have any effect in VR
 camera.position.setZ(30);
+const wasdMovement = new WASDMovement(camera, 0.2);
+
 
 const raycaster = new Raycaster();
 const mouse = new Vector2();
@@ -39,11 +43,12 @@ renderer.xr.enabled = true;
 
 
 document.body.appendChild(renderer.domElement);
-
+/*
 document.addEventListener('mousedown', onMouseDown, false);
 document.addEventListener('mouseup', onMouseUp, false);
 document.addEventListener('mousemove', onMouseMove, false);
 
+/*
 function onMouseDown(event) {
     // Convert mouse position to normalized device coordinates (-1 to +1)
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
@@ -90,25 +95,29 @@ function onMouseMove(event) {
             grabbedObject.position.copy(intersectionPoint); // Move the planet
         }
     }
-}
+}*/
 
 
 
 
 const controls = new OrbitControls(camera, renderer.domElement);
-controls.enableDamping = true;
-controls.dampingFactor = 0.05;
-controls.screenSpacePanning = false;
-controls.minDistance = 0;
-controls.maxDistance = 100;
+controls.enableDamping = true; 
+controls.dampingFactor = 0.05; 
+controls.screenSpacePanning = false; 
+controls.minDistance = 0; 
+controls.maxDistance = 100; 
 controls.maxPolarAngle = Math.PI;
+
+// Disable camera rotation with click-and-drag
+controls.enableRotate = false;
+controls.enablePan = false;
 
 window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
-
     renderer.setSize(window.innerWidth, window.innerHeight);
-})
+});
+
 
 const scene = new Scene();
 const solarSystem = new SolarSystem(scene);
@@ -172,6 +181,8 @@ function render(){
     solarSystem.animate();
 
     renderer.render(scene, camera);
+
+    wasdMovement.update();
 
     console.log('Planets:', solarSystem.getPlanets());
 
