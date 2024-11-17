@@ -1,10 +1,9 @@
 ﻿"use strict";
 
-import {PerspectiveCamera, Plane, Raycaster, Scene, Vector2, Vector3, WebGLRenderer} from "../build/three.module.js";
+import {PerspectiveCamera, Plane, Raycaster, Scene, Vector2, Vector3, WebGLRenderer, CubeTextureLoader} from "../build/three.module.js";
 import {SolarSystem} from "./SolarSystem.js";
 import {OrbitControls} from "../build/OrbitControls.js";
 import {VRButton} from "../build/VRButton.js";
-import { CubeTextureLoader } from '../build/three.module.js';
 import {GUI} from '../lib/dat.gui.module.js';
 import * as THREE from '../lib/three.module.js';
 import { WASDMovement } from './WASDMovement.js';
@@ -184,7 +183,7 @@ function render(){
 
     wasdMovement.update();
 
-    console.log('Planets:', solarSystem.getPlanets());
+    //console.log('Planets:', solarSystem.getPlanets());
 
     // if VR is NOT addded, we use this.
     // window.requestAnimationFrame(render);

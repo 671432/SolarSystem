@@ -1,15 +1,6 @@
 ﻿"use strict";
 
-import {
-    AmbientLight,
-    Color,
-    Mesh,
-    MeshBasicMaterial,
-    MeshPhongMaterial,
-    Object3D, PointLight,
-    SphereGeometry,
-    TextureLoader, Vector2
-} from "../build/three.module.js";
+import { AmbientLight, Color, Mesh, MeshBasicMaterial, MeshPhongMaterial, Object3D, PointLight, SphereGeometry, TextureLoader, Vector2 } from "../build/three.module.js";
 
 export class SolarSystem {
     constructor(scene) {
