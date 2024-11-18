@@ -9,7 +9,7 @@ import {
     DirectionalLight,
     RepeatWrapping,
     WebGLRenderer,
-} from '../lib/three.module.js';;
+} from 'three';
 import { WASDMovement } from './WASDMovement.js';
 
 export class MoonWalk {
