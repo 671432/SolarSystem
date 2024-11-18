@@ -15,7 +15,7 @@ const aspect = width / height;
 
 const fov = 75;
 const near = 0.1;
-const far = 100;
+const far = 500;
 
 const camera = new PerspectiveCamera(fov, aspect, near, far);
 // moves cam away from  oregon. won't have any effect in VR
