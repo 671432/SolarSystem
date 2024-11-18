@@ -101,9 +101,6 @@ function onMouseMove(event) {
 }
 
 
-
-
-
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true; 
 controls.dampingFactor = 0.05; 
@@ -113,8 +110,9 @@ controls.maxDistance = 100;
 controls.maxPolarAngle = Math.PI;
 
 // Disable camera rotation with click-and-drag
-////controls.enableRotate = false;
-////controls.enablePan = false;
+//controls.enableRotate = false;
+//controls.enablePan = false;
+
 
 window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
@@ -170,12 +168,8 @@ folder.add({ teleport: teleportToMars }, 'teleport').name('Teleport: Mars');
 folder.open();
 
 
-
-
-
-
 const loader = new CubeTextureLoader();
-const texture = loader.load([
+const skyboxGalaxy = loader.load([
     'assets/skybox/right3.png',
     'assets/skybox/left3.png',
     'assets/skybox/top3.png',
@@ -184,7 +178,17 @@ const texture = loader.load([
     'assets/skybox/back3.png'
 ]);
 
-scene.background = texture;
+const skyboxMoon = loader.load([
+    'assets/skybox/right.png',
+    'assets/skybox/left.png',
+    'assets/skybox/top.png',
+    'assets/skybox/bottom.png',
+    'assets/skybox/front.png',
+    'assets/skybox/back.png'
+]);
+
+scene.background = skyboxGalaxy;
+
 
 
 // Only IF VR is in the scene
@@ -192,12 +196,18 @@ renderer.setAnimationLoop(render);
 
 function render(){
     if (activeScene === "solarSystem") {
+        scene.background = skyboxGalaxy;
+
         solarSystem.animate();
         renderer.render(scene, camera);
     } else if (activeScene === "moonWalk") {
+        scene.background = skyboxMoon;
+
         moonWalk.render();
     }
-    requestAnimationFrame(render);
+    //requestAnimationFrame(render);
+
+    wasdMovement.update();
 
     ////console.log('Planets:', solarSystem.getPlanets());
 

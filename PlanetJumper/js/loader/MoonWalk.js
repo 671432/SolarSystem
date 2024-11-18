@@ -1,17 +1,7 @@
 "use strict";
 
-import {
-    Scene,
-    PerspectiveCamera,
-    PlaneGeometry,
-    Mesh,
-    MeshPhongMaterial,
-    TextureLoader,
-    AmbientLight,
-    DirectionalLight,
-    Vector3,
-    RepeatWrapping,
-} from "../build/three.module.js";
+import { Scene, PerspectiveCamera, PlaneGeometry, Mesh, MeshPhongMaterial, 
+    TextureLoader, AmbientLight, DirectionalLight, Vector3, RepeatWrapping, } from "../build/three.module.js";
 import { WASDMovement } from "./WASDMovement.js";
 
 export class MoonWalk {
