@@ -1,73 +1,65 @@
-"use strict";
-
-import { Scene, PerspectiveCamera, PlaneGeometry, Mesh, MeshPhongMaterial, 
-    TextureLoader, AmbientLight, DirectionalLight, Vector3, RepeatWrapping, } from "../build/three.module.js";
-import { WASDMovement } from "./WASDMovement.js";
+import {
+    Scene,
+    PerspectiveCamera,
+    PlaneGeometry,
+    Mesh,
+    MeshStandardMaterial,
+    TextureLoader,
+    AmbientLight,
+    DirectionalLight,
+    RepeatWrapping,
+    WebGLRenderer,
+} from 'three';
+import { WASDMovement } from './WASDMovement.js';
 
 export class MoonWalk {
     constructor(renderer) {
         this.renderer = renderer;
-
-        // Create the MoonWalk scene
         this.scene = new Scene();
 
-        // Create the camera
+        // Camera setup
         const fov = 75;
         const aspect = window.innerWidth / window.innerHeight;
         const near = 0.1;
         const far = 500;
         this.camera = new PerspectiveCamera(fov, aspect, near, far);
-        this.camera.position.set(0, 2, 0); // Start above the surface
+        this.camera.position.set(0, 5, 0);
 
-        // Add WASD movement
+        // Movement controls
         this.movementControls = new WASDMovement(this.camera, 0.2);
 
-        // Add a textured moon surface
-        const moonTexture = new TextureLoader().load("assets/moon_surface.jpg");
+        // Load textures
+        const textureLoader = new TextureLoader();
+        const moonTexture = textureLoader.load('/assets/moonWalkAssets/TextureColor.jpg');
+        const heightMap = textureLoader.load('/assets/moonWalkAssets/TextureDisplacement.jpg');
+
         moonTexture.wrapS = RepeatWrapping;
         moonTexture.wrapT = RepeatWrapping;
-        moonTexture.repeat.set(10, 10); // Scale the texture for better detail
+        moonTexture.repeat.set(10, 10);
 
-        const moonSurface = new Mesh(
-            new PlaneGeometry(500, 500),
-            new MeshPhongMaterial({
-                map: moonTexture,
-                bumpMap: moonTexture,
-                bumpScale: 0.1,
-            })
-        );
-        moonSurface.rotation.x = -Math.PI / 2; // Rotate to lie flat
+        // Create Moon surface
+        const moonGeometry = new PlaneGeometry(500, 500, 256, 256);
+        const moonMaterial = new MeshStandardMaterial({
+            map: moonTexture,
+            displacementMap: heightMap,
+            displacementScale: 10,
+            bumpMap: moonTexture,
+            bumpScale: 0.2,
+        });
+        const moonSurface = new Mesh(moonGeometry, moonMaterial);
+        moonSurface.rotation.x = -Math.PI / 2;
         this.scene.add(moonSurface);
 
-        // Add Earth in the sky
-        const earthTexture = new TextureLoader().load("assets/texture_earth.jpg");
-        const earth = new Mesh(
-            new PlaneGeometry(20, 20),
-            new MeshPhongMaterial({ map: earthTexture })
-        );
-        earth.position.set(0, 50, -100); // Position the Earth in the sky
-        this.scene.add(earth);
-
-        // Add Sun in the sky
-        const sunTexture = new TextureLoader().load("assets/texture_sun.jpg");
-        const sun = new Mesh(
-            new PlaneGeometry(40, 40),
-            new MeshPhongMaterial({ map: sunTexture })
-        );
-        sun.position.set(100, 100, 0); // Position the Sun
-        this.scene.add(sun);
-
-        // Add ambient lighting
-        const ambientLight = new AmbientLight(0xffffff, 0.4); // Soft light
+        // Lighting
+        const ambientLight = new AmbientLight(0xffffff, 0.3);
         this.scene.add(ambientLight);
 
-        // Add directional light (simulating the Sun's light)
-        const directionalLight = new DirectionalLight(0xffffff, 0.8);
-        directionalLight.position.set(50, 100, 50);
+        const directionalLight = new DirectionalLight(0xffffff, 1);
+        directionalLight.position.set(100, 100, 100);
         this.scene.add(directionalLight);
 
-        // Resize handling
-        window.addEventListener("resize", () => {
+        // Handle window resize
+        window.addEventListener('resize', () => {
             this.camera.aspect = window.innerWidth / window.innerHeight;
             this.camera.updateProjectionMatrix();
             this.renderer.setSize(window.innerWidth, window.innerHeight);
@@ -75,7 +67,6 @@ export class MoonWalk {
     }
 
     animate() {
-        // Simulate movement and animations
         this.movementControls.update();
     }
 
