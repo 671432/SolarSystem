@@ -1,20 +1,24 @@
 
-implement Earth's Moon (done)
-    attatch moon to earth orbit (fuck this for now)
+absolute essentials:
+    implement Earth's Moon (done)
+    attatch moon to earth orbit (done)
         moon has to rotate around earth, not sun (done)
-        moon has to  stay in earth's orbit even when earth is moved by the player. (fuck this for now aswell)
+        moon has to  stay in earth's orbit even when earth is moved by the player. (planet moving feature will be removed)
+    teleport Logic (done)
+    WASD movement (done, janky, but done)
+    Hight Map (when on moon) (done)
+        optional: improove heightmap (better textures, make it allign with the holes and mountains from the moon surface, etc)
+    Object (Rommskip brum brum)
 
-add light blocking object inside earth so that the moon doesn't light up when the earth is between the sun and the moon. (fuck this for now aswell)
-
-teleport Logic
-    scene change
-    player downscale (instead of increasing planet size) (fuck this for now aswell)
-
-add object collision for after teleportation
-
-WASD movement (done, janky, but done)
-
-hight map (Mars, Moon) (done kinda, bump map)
-
-MoonWalk.js should only create visuals (floor, planets, etc), and animations
-    everything else should be set in App.js
+nice to have:
+    jump (speed: 0.8 on mercury | 0.2 on moon)
+    mouse movement when on the moon
+    mouse lock (maybe on a specific button instead of "onClick")
+    info (show player controls at left upper corner on every page, preferably done inside the App.js file and not in HTML)
+    copy paste "MoonWalk.js" to new file "MarsWalk.js" and change textures from "moon..." to "mars..."
+    fix player height (currently a bit low when walking on the moon, I don't wanna be a midget)
+    add space ship sounds
+    add light blocking object inside earth so that the moon doesn't light up when the earth is between the sun and the moon.
+    add object collision when on moon/mars
+    MoonWalk.js should only create visuals (floor, planets, etc), and animations
+        everything else should be set in App.js

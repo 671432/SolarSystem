@@ -1,7 +1,7 @@
 "use strict";
 
-import { Scene, PerspectiveCamera, PlaneGeometry, Mesh, MeshPhongMaterial, CubeTextureLoader, 
-    TextureLoader, SphereGeometry, Color, AmbientLight, DirectionalLight, Vector3, Vector2, RepeatWrapping, } from "../build/three.module.js";
+import { Scene, PerspectiveCamera, PlaneGeometry, Mesh, MeshPhongMaterial, CubeTextureLoader, TextureLoader, 
+    SphereGeometry, Color, AmbientLight, DirectionalLight, Vector3, Vector2, RepeatWrapping, DoubleSide } from "../build/three.module.js";
 import { SolarSystem } from "./SolarSystem.js";
 import { WASDMovement } from "./WASDMovement.js";
 import { OrbitControls } from "../build/OrbitControls.js";
@@ -13,6 +13,49 @@ export class MoonWalk {
 
         // Create the MoonWalk scene
         this.scene = new Scene();
+
+        /* HeightMap - START */
+
+        // Load heightmap
+        const textureLoader = new TextureLoader();
+        const heightMap = textureLoader.load('./assets/heightmap/moonHeightMap.png');
+        const terrainTexture = textureLoader.load('./assets/surface/moonSurface.png'); // texture the heightmap
+
+        const widthTerrain = 500;  // Width of the terrain
+        const heightTerrain = 500; // Height of the terrain
+        const widthSegmentsTerrain = 1024;  // Increase for smoother terrain (256)
+        const heightSegmentsTerrain = 1024; // Increase for smoother terrain (256)
+
+        const planeGeometry = new PlaneGeometry(widthTerrain, heightTerrain, widthSegmentsTerrain, heightSegmentsTerrain);
+
+        const material = new MeshPhongMaterial({
+            //color: 0x888888,       // Base color
+            displacementMap: heightMap, // Using the heightmap for displacement
+            displacementScale: 2,  // Scale factor for height
+            wireframe: false,       // true = debugging
+            map: terrainTexture,
+            side: DoubleSide,        // Ensure visibility from both sides
+            polygonOffset: true,
+            polygonOffsetFactor: 1, // Push the heightmap forward
+            polygonOffsetUnits: 1, // Adjust as needed
+        });
+
+        // Create the mesh
+        const terrain = new Mesh(planeGeometry, material);
+        terrain.rotation.x = -Math.PI / 2; // Rotate to lie flat
+
+        // Ambient light for overall illumination
+        const ambientLightTerrain = new AmbientLight(0xffffff, 0.5);
+
+        // Directional light for shadows and highlights
+        const directionalLightTerrain = new DirectionalLight(0xffffff, 1);
+        directionalLightTerrain.position.set(100, 100, 100); // Position the light
+
+        this.scene.add(terrain);
+        this.scene.add(ambientLightTerrain);
+        this.scene.add(directionalLightTerrain);
+
+        /* HeightMap - END */
         
         const loader = new CubeTextureLoader();
 
@@ -65,10 +108,10 @@ export class MoonWalk {
         this.movementControls = new WASDMovement(this.camera, 0.2);
 
         // Add a textured moon surface
-        const moonTexture = new TextureLoader().load("assets/moonSurface.png");
+        const moonTexture = new TextureLoader().load("assets/surface/moonSurface.png");
         moonTexture.wrapS = RepeatWrapping;
         moonTexture.wrapT = RepeatWrapping;
-        moonTexture.repeat.set(10, 10); // Scale the texture for better detail
+        moonTexture.repeat.set(5, 5); // Scale the texture for better detail
 
         const moonSurface = new Mesh(
             new PlaneGeometry(500, 500),

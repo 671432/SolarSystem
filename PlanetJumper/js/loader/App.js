@@ -1,6 +1,7 @@
 ﻿"use strict";
 
-import {PerspectiveCamera, Plane, Raycaster, Scene, Vector2, Vector3, WebGLRenderer, CubeTextureLoader} from "../build/three.module.js";
+import {PerspectiveCamera, Plane, Raycaster, Scene, Vector2, Vector3, WebGLRenderer, CubeTextureLoader,
+     TextureLoader, PlaneGeometry, Mesh, MeshStandardMaterial, DoubleSide, AmbientLight, DirectionalLight } from "../build/three.module.js";
 import {SolarSystem} from "./SolarSystem.js";
 import {OrbitControls} from "../build/OrbitControls.js";
 import {VRButton} from "../build/VRButton.js";
@@ -27,8 +28,6 @@ const raycaster = new Raycaster();
 const mouse = new Vector2();
 let grabbedObject = null;
 const invisiblePlane = new Plane();
-
-
 
 
 const canvas = document.createElement('canvas');

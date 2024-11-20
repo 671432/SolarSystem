@@ -12,6 +12,8 @@
     "vite": "^5.4.11"
   },
   "dependencies": {
-    "three": "^0.170.0"
+    "three": "^0.170.0",
+    "utilities": "^1.0.6",
+    "utilities-js": "^1.1.5"
   }
 }
