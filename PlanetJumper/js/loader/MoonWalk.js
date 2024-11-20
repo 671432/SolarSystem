@@ -31,7 +31,7 @@ export class MoonWalk {
         const material = new MeshPhongMaterial({
             //color: 0x888888,       // Base color
             displacementMap: heightMap, // Using the heightmap for displacement
-            displacementScale: 2,  // Scale factor for height
+            displacementScale: 4,  // Scale factor for height
             wireframe: false,       // true = debugging
             map: terrainTexture,
             side: DoubleSide,        // Ensure visibility from both sides
@@ -80,7 +80,7 @@ export class MoonWalk {
         const far = 500;
         const aspect = window.innerWidth / window.innerHeight;
         this.camera = new PerspectiveCamera(fov, aspect, near, far);
-        this.camera.position.set(0, 2, 0); // Start above the surface
+        this.camera.position.set(0, 5, 0); // Start above the surface
 
         const camera = new PerspectiveCamera(fov, aspect, near, far);
 
@@ -105,7 +105,7 @@ export class MoonWalk {
         }
 
         // Add WASD movement
-        this.movementControls = new WASDMovement(this.camera, 0.2);
+        this.movementControls = new WASDMovement(this.camera, 0.25);
 
         // Add a textured moon surface
         const moonTexture = new TextureLoader().load("assets/surface/moonSurface.png");
