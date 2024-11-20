@@ -9,6 +9,8 @@ import {GUI} from '../lib/dat.gui.module.js';
 import * as THREE from '../lib/three.module.js';
 import { WASDMovement } from './WASDMovement.js';
 import { MoonWalk } from './MoonWalk.js';
+import { GLTFLoader } from '../build/GLTFLoader.js';
+
 
 const width = window.innerWidth;
 const height= window.innerHeight;
@@ -42,9 +44,30 @@ document.body.appendChild(VRButton.createButton(renderer));
 renderer.xr.enabled = true;
 // end
 
+const modelLoader = new GLTFLoader();
+modelLoader.load(
+    '/assets/Model/spaceship_-_cb1.glb',
+    function (gltf) {
+        const model = gltf.scene; 
+        model.position.set(0, -0.5, 29.5); 
+        model.scale.set(0.005, 0.005, 0.005); 
+        model.rotation.x = 0;
+        model.rotation.y = Math.PI / 2; 
+        model.rotation.z = 0; 
+        scene.add(model); 
+        console.log('Model loaded successfully!');
+    },
+    function (xhr) {
+        console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+    },
+    function (error) {
+        console.error('An error occurred while loading the model:', error);
+    }
+);
+
 
 document.body.appendChild(renderer.domElement);
-
+/*
 document.addEventListener('mousedown', onMouseDown, false);
 document.addEventListener('mouseup', onMouseUp, false);
 document.addEventListener('mousemove', onMouseMove, false);
@@ -98,8 +121,8 @@ function onMouseMove(event) {
         }
     }
 }
-
-
+*/
+/*
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true; 
 controls.dampingFactor = 0.05; 
@@ -107,7 +130,7 @@ controls.screenSpacePanning = false;
 controls.minDistance = 0; 
 controls.maxDistance = 100; 
 controls.maxPolarAngle = Math.PI;
-
+*/
 // Disable camera rotation with click-and-drag
 //controls.enableRotate = false;
 //controls.enablePan = false;
