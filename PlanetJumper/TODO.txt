@@ -3,12 +3,12 @@ absolute essentials:
     implement Earth's Moon (done)
     attatch moon to earth orbit (done)
         moon has to rotate around earth, not sun (done)
-        moon has to  stay in earth's orbit even when earth is moved by the player. (planet moving feature will be removed)
+        related feature removed | disregard - moon has to  stay in earth's orbit even when earth is moved by the player.
     teleport Logic (done)
     WASD movement (done, janky, but done)
     Hight Map (when on moon) (done)
         optional: improove heightmap (better textures, make it allign with the holes and mountains from the moon surface, etc)
-    Object (Rommskip brum brum)
+    Object (Rommskip brum brum) (done)
 
 nice to have:
     jump (speed: 0.8 on mercury | 0.2 on moon)

@@ -10,6 +10,7 @@ import * as THREE from '../lib/three.module.js';
 import { WASDMovement } from './WASDMovement.js';
 import { MoonWalk } from './MoonWalk.js';
 import { GLTFLoader } from '../build/GLTFLoader.js';
+import * as overlay from "./overlays.js";
 
 
 const width = window.innerWidth;
@@ -72,6 +73,9 @@ modelLoader.load(
 
 
 document.body.appendChild(renderer.domElement);
+/**
+ * below is the old mouse movement code which also allowed to pick up and move planets around.
+ */
 /*
 document.addEventListener('mousedown', onMouseDown, false);
 document.addEventListener('mouseup', onMouseUp, false);
@@ -129,10 +133,12 @@ function onMouseMove(event) {
 */
 //const canvas = renderer.domElement;
 
-canvas.addEventListener('keyP', () => {
+/** removed for now because the current mouse movement logic adds errors if pointerLock is added  */
+/*
+canvas.addEventListener('click', () => {
     canvas.requestPointerLock();
 });
-
+*/
 document.addEventListener('mousemove', onMouseMove, false);
 
 function onMouseMove(event) {
@@ -182,12 +188,19 @@ function godMode() {
 
 function teleportToSun() {
     // TODO: Teleport to Sun
+    activeScene = "solarSystem";
+    camera.position.set(0, 5.1, -29.3);
+    controls.enableRotate = false;
+    controls.enablePan = false;
+    folder.domElement.style.display = 'none';
+    wasdMovement.dispose();
+    overlay.gameOver();
     console.log("Teleporting to the Sun");
     // player.position.set(sunPosition.x, sunPosition.y, sunPosition.z);
 }
 
 function teleportToMoon() {
-    // TODO: Teleport to Moon (Need to create Earth's Moon first)
+    // Teleport to Moon
     activeScene = "moonWalk";
     console.log("Teleporting to the Moon");
     // player.position.set(moonPosition.x, moonPosition.y, moonPosition.z);
@@ -196,6 +209,7 @@ function teleportToMoon() {
 
 function teleportToMars() {
     // TODO: Teleport to Mars
+    //activeScene = "marsWalk";
     console.log("Teleporting to Mars");
     // player.position.set(marsPosition.x, marsPosition.y, marsPosition.z);
 }
