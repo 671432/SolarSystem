@@ -46,7 +46,7 @@ renderer.xr.enabled = true;
 
 const modelLoader = new GLTFLoader();
 modelLoader.load(
-    '/assets/Model/spaceship_-_cb1.glb',
+    './assets/Model/spaceship_-_cb1.glb',
     function (gltf) {
         const model = gltf.scene; 
         model.position.set(0, -0.5, 29.5); 
