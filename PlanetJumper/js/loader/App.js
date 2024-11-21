@@ -43,17 +43,22 @@ renderer.setSize(width, height);
 document.body.appendChild(VRButton.createButton(renderer));
 renderer.xr.enabled = true;
 // end
+let model = null
 
 const modelLoader = new GLTFLoader();
 modelLoader.load(
-    './assets/Model/spaceship_-_cb1.glb',
+    'assets/Model/spaceship_-_cb1.glb',
     function (gltf) {
-        const model = gltf.scene; 
-        model.position.set(0, -0.5, 29.5); 
-        model.scale.set(0.005, 0.005, 0.005); 
-        model.rotation.x = 0;
+        model = gltf.scene; 
+        //model.position.set(0, -0.5, 29.5); 
+        model.scale.set(0.02, 0.02, 0.02); 
+        //model.rotation.x = 0;
         model.rotation.y = Math.PI / 2; 
-        model.rotation.z = 0; 
+        //model.rotation.z = 0; 
+
+        const offset = new THREE.Vector3(0, -0.5, 2); // offset
+        model.position.copy(camera.position.clone().add(offset));
+
         scene.add(model); 
         console.log('Model loaded successfully!');
     },
@@ -122,7 +127,21 @@ function onMouseMove(event) {
     }
 }
 */
-/*
+//const canvas = renderer.domElement;
+
+canvas.addEventListener('keyP', () => {
+    canvas.requestPointerLock();
+});
+
+document.addEventListener('mousemove', onMouseMove, false);
+
+function onMouseMove(event) {
+    // Convert mouse position to normalized device coordinates
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    
+}
+
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true; 
 controls.dampingFactor = 0.05; 
@@ -130,7 +149,7 @@ controls.screenSpacePanning = false;
 controls.minDistance = 0; 
 controls.maxDistance = 100; 
 controls.maxPolarAngle = Math.PI;
-*/
+
 // Disable camera rotation with click-and-drag
 //controls.enableRotate = false;
 //controls.enablePan = false;
@@ -229,9 +248,16 @@ function render(){
     }
     //requestAnimationFrame(render);
 
+    // spaceShip modell sticks to player/camera
+    if (model) {
+        console.log("if{} Model status: " + (model));
+        const offset = new THREE.Vector3(0.0, -0.1, -0.5); // model offset related to camera (+right -left | +up -down | +back -forward)
+        model.position.copy(camera.position.clone().add(offset));
+    }else{console.log("else{} Model status: " + (model));}
+
     wasdMovement.update();
 
-    ////console.log('Planets:', solarSystem.getPlanets());
+    //console.log('Planets:', solarSystem.getPlanets());
 
     // if VR is NOT addded, we use this.
     // window.requestAnimationFrame(render);
