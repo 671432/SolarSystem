@@ -20,7 +20,6 @@ export class WASDMovement {
     }
 
     onKeyDown(event) {
-        // Update key states based on the pressed key
         switch (event.code) {
             case "KeyW":
                 this.keys.forward = true;
@@ -82,19 +81,17 @@ export class WASDMovement {
         forward.normalize();
         right.normalize();
 
-        // Apply movement based on key states
+        // Apply movement based on key
         if (this.keys.forward) direction.add(forward);
         if (this.keys.backward) direction.sub(forward);
         if (this.keys.left) direction.sub(right);
         if (this.keys.right) direction.add(right);
 
-        // Scale movement by speed
+        
         direction.multiplyScalar(this.speed);
 
-        // Update the camera position
         this.camera.position.add(direction);
 
-        // Rotation
         if (this.keys.rotateX) {
             this.camera.rotation.x += this.rotationSpeed;
         }
@@ -104,7 +101,7 @@ export class WASDMovement {
     }
 
     dispose() {
-        // Clean up event listeners
+        // Clean up event listeners for when we dont need it anymore. Comment out for testing.
         window.removeEventListener("keydown", this.onKeyDown);
         window.removeEventListener("keyup", this.onKeyUp);
     }
